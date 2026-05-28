@@ -1,198 +1,151 @@
-console.log("Quiz started");
-/* Frågarna. */
+
+console.log("Quiz startar");
+
+/* Variabler för senare! */
+var questionNumber = 0;
+var score = 0;
+
+
+/* Frågor */
 var questions = [
-
-  {
-    title: "Capital of Sweden?",
-
-    answers: [
-      "Stockholm",
-      "Oslo",
-      "Helsinki"
-    ],
-
-    correct: 0
-  },
-
-  {
-    title: "Capital of France?",
-
-    answers: [
-      "Berlin",
-      "Paris",
-      "Rome"
-    ],
-
-    correct: 1
-  },
-
-  {
-    title: "Capital of Spain?",
-
-    answers: [
-      "Madrid",
-      "Lisbon",
-      "London"
-    ],
-
-    correct: 0
-  },
-
-  {
-    title: "Capital of Norway?",
-
-    answers: [
-      "Oslo",
-      "Stockholm",
-      "Copenhagen"
-    ],
-
-    correct: 0
-  },
-
-  {
-    title: "Capital of Finland?",
-
-    answers: [
-      "Reykjavik",
-      "Helsinki",
-      "Dublin"
-    ],
-
-    correct: 1
-  },
-
-  {
-    title: "Brazil is in which continent?",
-
-    answers: [
-      "South America",
-      "Europe",
-      "Asia"
-    ],
-
-    correct: 0
-  },
-
-  {
-    title: "Japan is in which continent?",
-
-    answers: [
-      "Africa",
-      "Asia",
-      "South America"
-    ],
-
-    correct: 1
-  },
-
-  {
-    title: "Italy capital is?",
-
-    answers: [
-      "Rome",
-      "Paris",
-      "Madrid"
-    ],
-
-    correct: 0
-  },
-
-  {
-    title: "Germany capital is?",
-    answers: ["Vienna","Bern","Berlin"], correct: 2
-  },
 {
-    title: "Egypt is in which continent?",
-    answers: [
-      "Africa",
-      "Europe",
-      "Oceania"
-    ],
-    correct: 0
+title: "Capital of Sweden?",
+answers: ["Stockholm", "Oslo", "Helsinki"],
+correct: 0
+},
+
+{
+title: "Capital of France?",
+answers: ["Berlin", "Paris", "Rome"],
+correct: 1
+},
+
+{
+title: "Capital of Spain?",
+answers: ["Madrid", "Lisbon", "London"],
+correct: 0
+},
+
+{
+title: "Capital of Norway?",
+answers: ["Oslo", "Stockholm", "Copenhagen"],
+correct: 0
+},
+
+{
+title: "Capital of Finland?",
+answers: ["Reykjavik", "Helsinki", "Dublin"],
+correct: 1
+},
+
+{
+title: "Brazil is in which continent?",
+answers: ["South America", "Europe", "Asia"],
+correct: 0
+},
+
+{
+title: "Japan is in which continent?",
+answers: ["Africa", "Asia", "South America"],
+correct: 1
+},
+
+{
+title: "Italy capital is?",
+answers: ["Rome", "Paris", "Madrid"],
+correct: 0
+},
+
+{
+title: "Germany capital is?",
+answers: ["Vienna", "Bern", "Berlin"],
+correct: 2
+},
+
+{
+title: "Egypt is in which continent?",
+answers: ["Africa", "Europe", "Oceania"],
+correct: 0
 }
-];
-/* För HTML! */
+]
+
+/* FÖR HTML! */
 var start = document.getElementById("start");
 var quiz = document.getElementById("quiz");
 var result = document.getElementById("result");
-var question = document.getElementById("qText");
-var b1 = document.getElementById("a0");
-var b2 = document.getElementById("a1");
-var b3 = document.getElementById("a2");
+
+var qText = document.getElementById("qText");
+
+var progressText = document.getElementById("progressText");
+
+var a0 = document.getElementById("a0");
+var a1 = document.getElementById("a1");
+var a2 = document.getElementById("a2");
+
 var finalText = document.getElementById("finalText");
-var startBtn = document.getElementById("btnStart");
+
+var btnStart = document.getElementById("btnStart");
 var againBtn = document.getElementById("againBtn");
 
-
-/* Variabler, var var var var, tung tung tung sahur. */
-var number = 0;
-var score = 0;
-
-/* Start knapp */
-startBtn.onclick = function () {
-
-  start.classList.add("hide");
-
-  quiz.classList.remove("hide");
-
-  showQuestion();
+/* Starta quiz */
+btnStart.onclick = function () {
+start.classList.add("hide");
+quiz.classList.remove("hide");
+showQuestion();
 };
+
 /* Visa fråga */
 function showQuestion() {
 
-  question.innerText = questions[number].title;
+qText.innerText = questions[questionNumber].title;
 
-  b1.innerText = questions[number].answers[0];
+progressText.innerText =
+"Question " + (questionNumber + 1) + " / " + questions.length;
 
-  b2.innerText = questions[number].answers[1];
-
-  b3.innerText = questions[number].answers[2];
+a0.innerText = questions[questionNumber].answers[0];
+a1.innerText = questions[questionNumber].answers[1];
+a2.innerText = questions[questionNumber].answers[2];
 }
 
+/* Kolla svar */
+function checkAnswer(answer) {
 
-/* Knapp 1 */
-b1.onclick = function () {
-  if (questions[number].correct == 0) {
-    score++;
-   }
-  nextQuestion();
-};
-
-/* Knapp 2 */
-b2.onclick = function () {
-  if (questions[number].correct == 1) {
-    score++;
-  }
-  nextQuestion();
-};
-/* Knapp 3 */
-b3.onclick = function () {
-  if (questions[number].correct == 2) {
+if (answer == questions[questionNumber].correct) {
 score++;
 }
-nextQuestion();
-};
+questionNumber++;
+
+/* Slut */
+if (questionNumber >= questions.length) {
+quiz.classList.add("hide");
+result.classList.remove("hide");
+finalText.innerText = "You got " + score + " correct!";
+}
+
 /* Nästa fråga */
-function nextQuestion() {
-
-  number++;
-
-if (number >= questions.length) {
-  quiz.classList.add("hide");
-  result.classList.remove("hide");
-  finalText.innerText = "You got " + score + " correct!";
-}
 else {
-  showQuestion();
+showQuestion();
 }
+}
+/* Knappar */
+a0.onclick = function () {
+checkAnswer(0);
+};
 
-}
-/* Play again */
+a1.onclick = function () {
+checkAnswer(1);
+};
+
+a2.onclick = function () {
+checkAnswer(2);
+};
+
+/* Spela igen */
 againBtn.onclick = function () {
-  result.classList.add("hide");
-  start.classList.remove("hide");
-  
-  number = 0;
-  score = 0;
-}
+result.classList.add("hide");
+start.classList.remove("hide");
+
+questionNumber = 0;
+score = 0;
+
+};

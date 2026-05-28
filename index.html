@@ -4,68 +4,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Quiz</title>
-
   <link rel="stylesheet" href="webbQuiz.css">
   <script src="webbQuiz.js" defer></script>
 </head>
-
 <body>
 
   <!-- START SCREEN -->
   <div id="start" class="screen">
-
     <img src="the world.jpg" alt="World" width="180">
-
     <h1 class="StartTitle">
-      Do you know the world?
+      Do you know the world? (EASY DIFFICULTY!)
     </h1>
 
     <button id="btnStart" class="BigBtn">
-      Start Quiz
+      Start Quiz!
     </button>
-
   </div>
-
 
   <!-- QUIZ SCREEN -->
   <div id="quiz" class="screen hide">
-
     <header class="topBar">
+      <h2 id="qText" class="question"> Question here </h2>
+      <p id="progressText"></p>
+     </header>
+     <main class="mid">
 
-      <h2 id="qText" class="question">
-        Question here
-      </h2>
-
-    </header>
-
-
-    <main class="mid">
-
-      <button id="a0" class="ansBtn">
-        Answer 1
+      <button id="a0" class="desBtn"> 
+        Answer 1 
       </button>
 
-      <button id="a1" class="ansBtn">
+      <button id="a1" class="desBtn">
         Answer 2
       </button>
 
-      <button id="a2" class="ansBtn">
+      <button id="a2" class="desBtn">
         Answer 3
       </button>
-
     </main>
-
-
     <footer class="bottomBar"></footer>
-
   </div>
-
 
   <!-- RESULT SCREEN -->
   <div id="result" class="screen hide">
-    <h2>Result</h2>
-    <p id="finalText"></p>
-    <button id="againBtn" class="BigBtn">
+     <h2>Final Result!</h2>
+     <p id="finalText"></p>
+     <button id="againBtn" class="BigBtn">
       Play Again
     </button>
   </div>
